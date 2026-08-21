@@ -1,0 +1,11 @@
+# Local values for the Cloudflare Worker. Copy to `.dev.vars` (gitignored) and
+# edit — `wrangler dev` / `pnpm dev` load it automatically.
+#
+# In production these are set on the Worker itself, never in the repo:
+#   pnpm wrangler secret put ALLOWED_ORIGINS
+# or Cloudflare dashboard → Workers → your Worker → Settings → Variables.
+
+# Comma-separated origins allowed to call the rooms API from a browser.
+# Only needed when the app is hosted apart from the Worker (e.g. on Vercel).
+# Unset or empty means "no restriction", which is what local dev uses.
+ALLOWED_ORIGINS=""

@@ -1,0 +1,31 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "scrum-poker-planning",
+  "main": "./workers/app.ts",
+  "compatibility_date": "2026-08-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "assets": {
+    "directory": "./build/client"
+  },
+  "observability": {
+    "enabled": true
+  },
+  // No `vars` block on purpose. The one value this Worker reads,
+  // ALLOWED_ORIGINS, is deployment-specific, so it is injected instead of
+  // committed: `.dev.vars` locally, `wrangler secret put` (or the dashboard)
+  // in production. See `.dev.vars.example` and `workers/cors.ts`.
+  "durable_objects": {
+    "bindings": [
+      {
+        "name": "POKER_ROOMS",
+        "class_name": "PokerRoom"
+      }
+    ]
+  },
+  "migrations": [
+    {
+      "tag": "v1",
+      "new_sqlite_classes": ["PokerRoom"]
+    }
+  ]
+}
